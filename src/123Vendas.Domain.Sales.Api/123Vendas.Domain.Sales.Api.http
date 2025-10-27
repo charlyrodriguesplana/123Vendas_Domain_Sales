@@ -1,0 +1,6 @@
+@_123Vendas.Domain.Sales.Api_HostAddress = http://localhost:5118
+
+GET {{_123Vendas.Domain.Sales.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
