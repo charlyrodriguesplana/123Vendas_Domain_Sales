@@ -7,5 +7,6 @@ namespace _123Vendas.Domain.Sales.Api.Features
     public class SalesController : ControllerBase
     {
 
+
     }
 }
