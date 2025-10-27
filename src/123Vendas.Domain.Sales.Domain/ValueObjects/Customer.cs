@@ -1,4 +1,4 @@
-namespace _123Vendas.Domain.Sales.Domain.Entities.ExternalIdentities;
+namespace _123Vendas.Domain.Sales.Domain.ValueObjects;
 
 /// <summary>
 /// External Identity para referenciar clientes do domínio CRM
@@ -9,7 +9,7 @@ public class Customer
     public string Name { get; private set; }
     public string Document { get; private set; }
 
-    public Customer(Guid id, string name, string document)
+    public Customer(Guid id, string name)
     {
         if (id == Guid.Empty)
             throw new ArgumentException("Customer ID cannot be empty", nameof(id));
@@ -17,11 +17,7 @@ public class Customer
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentException("Customer name cannot be empty", nameof(name));
 
-        if (string.IsNullOrWhiteSpace(document))
-            throw new ArgumentException("Customer document cannot be empty", nameof(document));
-
         Id = id;
         Name = name.Trim();
-        Document = document.Trim();
     }
 }

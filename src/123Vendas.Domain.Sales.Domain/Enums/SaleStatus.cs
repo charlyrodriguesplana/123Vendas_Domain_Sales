@@ -1,4 +1,4 @@
-namespace _123Vendas.Domain.Sales.Domain.Entities.Enums;
+namespace _123Vendas.Domain.Sales.Domain.Enums;
 
 public enum SaleStatus
 {
