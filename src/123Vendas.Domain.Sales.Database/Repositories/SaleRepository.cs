@@ -17,6 +17,13 @@ namespace _123Vendas.Domain.Sales.Database.Repositories
                 .FirstOrDefaultAsync(s => s.Id == id, cancellationToken);
         }
 
+        public async Task<IEnumerable<Sale>> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            return await context.Sales
+                .OrderByDescending(s => s.SaleDate)
+                .ToListAsync(cancellationToken);
+        }
+
         public Task UpdateAsync(Sale sale, CancellationToken cancellationToken = default)
         {
             context.Sales.Update(sale);
