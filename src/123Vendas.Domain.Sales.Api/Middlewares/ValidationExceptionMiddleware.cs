@@ -25,13 +25,31 @@ namespace _123Vendas.Domain.Sales.Api.Middlewares
                     Message = errorMessages
                 };
 
-                var json = JsonSerializer.Serialize(response, new JsonSerializerOptions
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                });
-
-                await context.Response.WriteAsync(json);
+                await WriteResponseAsync(context, response);
             }
+            catch (InvalidOperationException ex)
+            {
+                context.Response.StatusCode = StatusCodes.Status404NotFound;
+                context.Response.ContentType = "application/json";
+
+                var response = new ApiResponse
+                {
+                    Success = false,
+                    Message = ex.Message
+                };
+
+                await WriteResponseAsync(context, response);
+            }
+        }
+
+        private static async Task WriteResponseAsync(HttpContext context, ApiResponse response)
+        {
+            var json = JsonSerializer.Serialize(response, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+
+            await context.Response.WriteAsync(json);
         }
     }
 }
