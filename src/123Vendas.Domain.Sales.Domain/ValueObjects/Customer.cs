@@ -12,10 +12,10 @@ public class Customer
     public Customer(Guid id, string name)
     {
         if (id == Guid.Empty)
-            throw new ArgumentException("Customer ID cannot be empty", nameof(id));
+            throw new ArgumentException("ID do cliente não pode ser vazio", nameof(id));
 
         if (string.IsNullOrWhiteSpace(name))
-            throw new ArgumentException("Customer name cannot be empty", nameof(name));
+            throw new ArgumentException("Nome do cliente não pode ser vazio", nameof(name));
 
         Id = id;
         Name = name.Trim();

@@ -11,10 +11,10 @@ public class Branch
     public Branch(Guid id, string name)
     {
         if (id == Guid.Empty)
-            throw new ArgumentException("Branch ID cannot be empty", nameof(id));
+            throw new ArgumentException("ID da filial não pode ser vazio", nameof(id));
 
         if (string.IsNullOrWhiteSpace(name))
-            throw new ArgumentException("Branch name cannot be empty", nameof(name));
+            throw new ArgumentException("Nome da filial não pode ser vazio", nameof(name));
 
         Id = id;
         Name = name.Trim();

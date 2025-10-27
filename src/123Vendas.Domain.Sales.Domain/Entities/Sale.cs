@@ -36,7 +36,7 @@ namespace _123Vendas.Domain.Sales.Domain.Entities
             IEnumerable<SaleItem> items)
         {
             if (string.IsNullOrWhiteSpace(saleNumber))
-                throw new DomainException("Sale number is required.");
+                throw new DomainException("Número da venda é obrigatório");
 
             SaleNumber = saleNumber;
             SaleDate = saleDate;
@@ -51,7 +51,7 @@ namespace _123Vendas.Domain.Sales.Domain.Entities
             _items.AddRange(items);
 
             if (_items.Count == 0)
-                throw new DomainException("A sale must contain at least one item.");
+                throw new DomainException("A venda deve conter pelo menos um item");
         }
 
         public static Sale Create(
