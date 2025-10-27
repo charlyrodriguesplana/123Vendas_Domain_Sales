@@ -27,7 +27,7 @@ namespace _123Vendas.Domain.Sales.Domain.Entities
             if (quantity <= 0)
                 throw new DomainException("Quantidade precisa ser informada");
 
-            if (quantity > 20)
+            if (quantity >= 20)
                 throw new DomainException("Não é permitido a venda de 20 itens iguais");
 
             ProductId = productId;

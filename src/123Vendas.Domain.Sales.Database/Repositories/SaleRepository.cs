@@ -4,36 +4,29 @@ using Microsoft.EntityFrameworkCore;
 
 namespace _123Vendas.Domain.Sales.Database.Repositories
 {
-    public class SaleRepository : ISaleRepository
+    public class SaleRepository(SalesDbContext context) : ISaleRepository
     {
-        private readonly SalesDbContext _context;
-
-        public SaleRepository(SalesDbContext context)
-        {
-            _context = context;
-        }
-
         public async Task AddAsync(Sale sale, CancellationToken cancellationToken = default)
         {
-            await _context.Sales.AddAsync(sale, cancellationToken);
+            await context.Sales.AddAsync(sale, cancellationToken);
         }
 
         public async Task<Sale?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            return await _context.Sales
+            return await context.Sales
                 .FirstOrDefaultAsync(s => s.Id == id, cancellationToken);
         }
 
         public Task UpdateAsync(Sale sale, CancellationToken cancellationToken = default)
         {
-            _context.Sales.Update(sale);
+            context.Sales.Update(sale);
             return Task.CompletedTask;
         }
 
         //Isso poderia vir de um Unit of work, achei mais simples fazer isso, mas um projeto da vida real, eu provavelmente iria para algo como Unit of work!
         public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            await _context.SaveChangesAsync(cancellationToken);
+            await context.SaveChangesAsync(cancellationToken);
         }
     }
 }

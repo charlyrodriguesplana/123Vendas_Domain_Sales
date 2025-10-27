@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Exceptions;
@@ -47,7 +48,14 @@ namespace _123Vendas.Domain.Sales.Api
             builder.Services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(typeof(_123Vendas.Domain.Sales.Application.UsesCase.Sale.Create.CreateSaleCommand).Assembly);
+                cfg.AddOpenBehavior(typeof(_123Vendas.Domain.Sales.Api.Behaviors.ValidationBehavior<,>));
             });
+
+            // Register FluentValidation
+            builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+
+            // Register AutoMapper
+            builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
             // Register DbContext
             builder.Services.AddDbContext<_123Vendas.Domain.Sales.Database.SalesDbContext>(options =>
@@ -64,6 +72,8 @@ namespace _123Vendas.Domain.Sales.Api
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            app.UseMiddleware<_123Vendas.Domain.Sales.Api.Middlewares.ValidationExceptionMiddleware>();
 
             if (app.Environment.IsDevelopment())
             {

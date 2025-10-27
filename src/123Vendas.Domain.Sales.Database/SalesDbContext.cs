@@ -3,15 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace _123Vendas.Domain.Sales.Database
 {
-    public class SalesDbContext : DbContext
+    public class SalesDbContext(DbContextOptions<SalesDbContext> options) : DbContext(options)
     {
-        public SalesDbContext(DbContextOptions<SalesDbContext> options) : base(options)
-        {
-        }
-
         public DbSet<Sale> Sales { get; set; }
 
-        //Em um projeto maior ou real, eu criaria arquivos especificos de configuração para cada tabela.
+        //Em um projeto maior ou real, eu criaria arquivos especificos de configuraï¿½ï¿½o para cada tabela.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
