@@ -1,4 +1,4 @@
-namespace _123Vendas.Domain.Sales.Domain.Entities.ExternalIdentities;
+namespace _123Vendas.Domain.Sales.Domain.ValueObjects;
 
 /// <summary>
 /// External Identity para referenciar produtos do domínio de Estoque
