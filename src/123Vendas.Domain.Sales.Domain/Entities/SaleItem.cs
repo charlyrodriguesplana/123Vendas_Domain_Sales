@@ -1,5 +1,4 @@
 ﻿using _123Vendas.Domain.Sales.Domain.Exceptions;
-using Sales.Domain.Core;
 
 namespace _123Vendas.Domain.Sales.Domain.Entities
 {
@@ -12,24 +11,24 @@ namespace _123Vendas.Domain.Sales.Domain.Entities
         public decimal DiscountPercent { get; private set; }
         public decimal TotalValue => CalculateTotal();
 
-        private SaleItem() { } // for EF
+        private SaleItem() { }
 
         public SaleItem(Guid productId, string productName, decimal unitPrice, int quantity)
         {
             if (productId == Guid.Empty)
-                throw new DomainException("Invalid ProductId");
+                throw new DomainException("Produto Inválido");
 
             if (string.IsNullOrWhiteSpace(productName))
-                throw new DomainException("Product name is required");
+                throw new DomainException("Nome do produto é obrigatório");
 
             if (unitPrice <= 0)
-                throw new DomainException("Invalid unit price");
+                throw new DomainException("Valor unitário não deve ser zero");
 
             if (quantity <= 0)
-                throw new DomainException("Quantity must be greater than zero");
+                throw new DomainException("Quantidade precisa ser informada");
 
             if (quantity > 20)
-                throw new DomainException("Cannot sell more than 20 identical items");
+                throw new DomainException("Não é permitido a venda de 20 itens iguais");
 
             ProductId = productId;
             ProductName = productName;
