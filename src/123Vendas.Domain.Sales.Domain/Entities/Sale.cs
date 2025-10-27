@@ -63,7 +63,8 @@ namespace _123Vendas.Domain.Sales.Domain.Entities
         {
             var sale = new Sale(saleNumber, saleDate, customer, branch, items)
             {
-                Id = Guid.NewGuid()
+                Id = Guid.NewGuid(),
+                Status = SaleStatus.Active
             };
 
             sale.RegisterEvent(new SaleCreatedEvent(
@@ -94,7 +95,7 @@ namespace _123Vendas.Domain.Sales.Domain.Entities
         {
             var item = _items.FirstOrDefault(i => i.ProductId == productId);
             if (item == null)
-                throw new DomainException("Item not found in this sale.");
+                throw new DomainException("Item não encontrado para essa venda.");
 
             //Poderiamos ter um evento para item cancelado também.
         }
