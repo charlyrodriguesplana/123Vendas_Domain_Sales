@@ -7,7 +7,6 @@ namespace _123Vendas.Domain.Sales.Database
     {
         public DbSet<Sale> Sales { get; set; }
 
-        //Em um projeto maior ou real, eu criaria arquivos especificos de configura��o para cada tabela.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
